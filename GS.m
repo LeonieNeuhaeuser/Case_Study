@@ -3,7 +3,6 @@ function [u ,err,errvec]= GS(A,f,u0,tol)
     n = length(u0);
     u = u0; 
     err = max(abs(A*u-f));
-    temp = zeros(n,1);
     diagonal = diag(A);
     errvec =[];
     

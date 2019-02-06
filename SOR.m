@@ -1,4 +1,4 @@
-function [u, err,errvec] = SOR(w, A, f, u0, tol)
+function [u, err, errvec] = SOR(w, A, f, u0, tol)
 
     n = length(u0);
     L = tril(A, -1);
@@ -11,7 +11,7 @@ function [u, err,errvec] = SOR(w, A, f, u0, tol)
     while err > tol
         u = (D+w*L)\(((1-w)*D-w*R)*u + w*f);
         err = max(abs(A*u - f));
-        disp(err);
+        %disp(err);
         errvec =[errvec err];
     end
 end
