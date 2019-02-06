@@ -1,10 +1,10 @@
-function [u, err] = SOR(w, A, f, u0, tol)
+function [u, err,errvec] = SOR(w, A, f, u0, tol)
 
-    u = length(u0);
+    n = length(u0);
     L = tril(A, -1);
     R = triu(A, 1);
     D = spdiags(diag(A), 0, n, n);
-    
+    errvec =[];
     u = u0;
     err = max(abs(A*u - f));
     
@@ -12,5 +12,6 @@ function [u, err] = SOR(w, A, f, u0, tol)
         u = (D+w*L)\(((1-w)*D-w*R)*u + w*f);
         err = max(abs(A*u - f));
         disp(err);
+        errvec =[errvec err];
     end
 end
