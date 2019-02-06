@@ -16,5 +16,4 @@ function A = create_2d_finite_diff_A(a,b,c,d,N,M)
         A(k*(M-1), k*(M-1)+1) = 0;
         A(k*(M-1)+1, k*(M-1)) = 0;
     end
-    
 end
