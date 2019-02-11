@@ -14,7 +14,9 @@ w=1
 err_vec1=[]
 err_vec2=[]
 
-for N= [8,16,32,64]
+iterations = [8,16,32,64]
+
+for N= iterations
 
     % Initialise 
     dx = 1/N; dy = dx;
@@ -46,9 +48,9 @@ for N= [8,16,32,64]
 end
 
 h=figure
-    semilogy(err_vec1)
+    semilogy(iterations,err_vec1)
     title('Test problem 1')
 
 g=figure
-    semilogy(err_vec2)
+    semilogy(iterations,err_vec2)
     title('Test problem 2')
