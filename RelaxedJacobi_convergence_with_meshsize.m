@@ -10,7 +10,7 @@ sol2 = @(x,y) (x-1).^5.*x.^2.*y.*(y-1);
 % Parameters 
 xmin = 0; xmax = 1; ymin = 0; ymax = 1;
 tol = 1e-3;
-w=1
+w = 1;
 err_vec1=[];
 err_vec2=[];
 bound = [];
@@ -18,7 +18,7 @@ bound = [];
 
 iterations = [8,16,32,64];
 
-for N= iterations
+for N = iterations
 
     % Initialise 
     dx = 1/N; dy = dx;
@@ -35,23 +35,20 @@ for N= iterations
 
     % Solving the system and reshaping
     u0 = zeros(length(F),1);
+    
     % Example Problem 1
-
     [y_1_RJ, err_1_RJ, errvec_1_RJ] = RelaxedJacobi(w,A,F,u0,tol); y_1_RJ = reshape(y_1_RJ, N-1, N-1); u1(2:N,2:N) = y_1_RJ;
     err_vec1 = [err_vec1 err_1_RJ];
 
-
-
     % Example Problem 2
-
     [y_2_RJ,err_2_RJ, errvec_2_RJ] = RelaxedJacobi(w,A,G,u0,tol); y_2_RJ = reshape(y_2_RJ, N-1, N-1); u2(2:N,2:N) = y_2_RJ;
     err_vec2 = [err_vec2 err_2_RJ];
     
     curr_bound = log(tol)/log(cos(pi*dx));
-    bound = [bound curr_bound]
+    bound = [bound curr_bound];
 end
 
-h=figure
+h=figure;
     plot(iterations,err_vec1)
     hold on
     plot(iterations,bound)
@@ -60,7 +57,7 @@ h=figure
     xlabel("number of gridpoints (N=M)")
     ylabel("iterations")
 
-g=figure
+g=figure;
     plot(iterations,err_vec2)
     hold on
     plot(iterations,bound)

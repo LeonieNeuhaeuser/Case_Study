@@ -28,7 +28,7 @@ G = makeF(X,Y,g,N,M);
 
 % Solving the system and reshaping
 u0 = zeros(length(F),1);
-h = figure
+h = figure;
 % Example Problem 1
 for w=linspace(0.1,1,9)
     [y_1_RJ, err_1_RJ, errvec_1_RJ] = RelaxedJacobi(w,A,F,u0,tol); y_1_RJ = reshape(y_1_RJ, M-1, N-1); u1(2:M,2:N) = y_1_RJ;
@@ -39,7 +39,7 @@ for w=linspace(0.1,1,9)
 end
 hold off
 
-g=figure
+g=figure;
 % Example Problem 2
 for w=linspace(0.1,1,10)
     [y_2_RJ,err_2_RJ, errvec_2_RJ] = RelaxedJacobi(w,A,G,u0,tol); y_2_RJ = reshape(y_2_RJ, M-1, N-1); u2(2:M,2:N) = y_2_RJ;
