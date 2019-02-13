@@ -4,9 +4,9 @@ function [u, err, errvec] = SOR(w, A, f, u0, tol)
     L = tril(A, -1);
     R = triu(A, 1);
     D = spdiags(diag(A), 0, n, n);
-    errvec =[];
     u = u0;
     err = max(abs(A*u - f));
+    errvec = [err];
     
     while err > tol
         u = (D+w*L)\(((1-w)*D-w*R)*u + w*f);

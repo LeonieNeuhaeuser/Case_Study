@@ -7,7 +7,7 @@ function [u ,err, errvec]= GS2(A,f,u0,tol)
     
     u = u0; 
     err = max(abs(A*u-f));
-    errvec =[];
+    errvec =[err];
     
     while err > tol
         u = (D+L)\(-R*u+f);

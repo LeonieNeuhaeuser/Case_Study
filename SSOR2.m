@@ -7,7 +7,7 @@ function [u,err, errvec] = SSOR2(w,A,f,u0,tol)
     
     u = u0; 
     err = max(abs(A*u-f));
-    errvec = [];
+    errvec = [err];
     
     while err > tol 
         temp = (D+w*L)\(((1-w)*D-w*R)*u + w*f);
