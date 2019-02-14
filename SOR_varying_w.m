@@ -1,7 +1,7 @@
 
 %% Error plots 
 clear, close all
-omegavector = linspace(0,2,11);
+omegavector = linspace(0,2,14);
 omegavector(1)=[];
 omegavector(10)=[];
 

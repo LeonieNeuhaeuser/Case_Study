@@ -13,8 +13,8 @@ xmin = 0; xmax = 1; ymin = 0; ymax = 1;
 tol = 1e-3;
 w = 0.5; %values larger than 1 won't work for relaxed Jacobi, 
 %but are preferred for SOR and SSOR 
-N = 512; 
-M = 512; 
+N = 256; 
+M = 256; 
 
 % Initialise 
 dx = 1/N; dy = 1/M;
