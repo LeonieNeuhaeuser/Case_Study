@@ -9,8 +9,12 @@ sol2 = @(x,y) (x-1).^5.*x.^2.*y.*(y-1);
 
 % Parameters 
 xmin = 0; xmax = 1; ymin = 0; ymax = 1;
-tol = 1e-3;
-w = 0.5; %values larger than 1 won't work for relaxed Jacobi, 
+tol = 1e-5;
+presteps = 5;
+poststeps = 5; 
+levels = 2; 
+nmin = 1000;
+
 %but are preferred for SOR and SSOR 
 N = 256; 
 M = 256; 
@@ -35,12 +39,12 @@ u0 = zeros(length(F),1);
 % Pre & Post smoothing step set to be 5 repetively
 disp('Started multigrid')
 tic
-[y1_MG, errvect_1,iter1] = Multigrid(A,F,u0,tol/100);
+[y1_MG, errvect_1] = Multigrid_Vcycle(A,F,u0,tol,presteps,poststeps,nmin,1,levels);
 toc
 %endtic2
 %starttic 3
 tic
-[y2_MG, errvect_2,iter2] = Multigrid(A,G,u0,tol/100);
+[y2_MG, errvect_2] = Multigrid_Vcycle(A,G,u0,tol,presteps,poststeps,nmin,1,levels);
 toc
 %endtic3
 
