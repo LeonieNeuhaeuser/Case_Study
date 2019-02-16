@@ -52,18 +52,18 @@ for N= iterations
 end
 
 h=figure
-    plot(iterations,err_vec1)
+    loglog(iterations,err_vec1)
     hold on
-    plot(iterations,bound)
+    loglog(iterations,bound)
     legend("actual performance","upper bound", 'Location','North')
     title('Test problem 1')
     xlabel("number of gridpoints (N=M)")
     ylabel("iterations")
 
 g=figure
-    plot(iterations,err_vec2)
+    loglog(iterations,err_vec2)
     hold on
-    plot(iterations,bound)
+    loglog(iterations,bound)
     legend("actual performance","upper bound", 'Location', 'North')
     title('Test problem 2')
     xlabel("number of gridpoints (N=M)")

@@ -28,7 +28,7 @@ G = makeF(X,Y,g,N,M);
 
 % Solving the system and reshaping
 u0 = zeros(length(F),1);
-u0_2 = ones(length(F),1);
+u0_2 = randn(length(F),1); 
 lambda = (1/2)*(cos(2*pi*dx)+cos(3*pi*dx));
 lambda_max = cos(pi*dx);
 h = figure
@@ -40,7 +40,7 @@ h = figure
     semilogy(newerrvec_1_RJ);
     len = length(errvec_1_RJ);
     curr_lam = lambda;
-    x = linspace(0,len,len);
+    x = linspace(0,1.2*len,1.2*len);
     semilogy(x,norm(u1(1:M+1,1:N+1))*curr_lam.^x);
     semilogy(x,norm(u1(1:M+1,1:N+1))*lambda_max.^x);
     title('Test problem 1', 'Interpreter','latex');
@@ -57,7 +57,7 @@ g=figure
     semilogy(newerrvec_2_RJ);
     len = length(errvec_2_RJ);
     curr_2am = lambda;
-    x = linspace(0,len,len)
+    x = linspace(0,2.5*len,2*len)
     semilogy(x,norm(u1(1:M+1,1:N+1))*lambda_max.^x);
     title('Test problem 2')
     legend("initial guess zero vector", "perturbated","spectral radius", 'Interpreter','latex');

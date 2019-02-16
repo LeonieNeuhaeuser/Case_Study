@@ -9,7 +9,7 @@ function [u,iterations, err_vec] = RelaxedJacobi(w,A,f,u0,tol)
     
     u = u0; 
     err = max(abs(A*u-f));
-    err_vec = [];
+    err_vec = [err];
     
     while err > tol 
         u = ((1-w).* I - w .* D_inv *(L+R))*u + w.*D_inv*f;
