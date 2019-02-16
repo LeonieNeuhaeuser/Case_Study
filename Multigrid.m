@@ -1,58 +1,43 @@
-
 % Assume A to be square and  its dimension is odd 
 function [u1_m_grid, errvect,iter]=Multigrid(A,F,u0,tol)
 
-% Initialization
-iter = 0;
-err= norm(F-A*u0,2);
-errvect(1) =err;
-k=1;
-u_i =u0;
-[R, P, A_bar] =multigrid_operator(A);
-n =size(A);
-steps =5;
+    % Initialization
+    err = norm(F-A*u0,2);
+    errvect(1) = err;
+    k = 1;
+    u_i = u0;
+    [R, P, A_bar] = multigrid_operator(A);
+    n = size(A);
+    steps = 5;
 
+    while err >  tol
+        % Pre-smoothing
+        u_s = smoothing(A,F,u_i,steps,1/2);
 
-while err >  tol
+        % Calculate  residual in the fine grid 
+        r_s = F - A*u_s;
 
-% Pre-smoothing
-u_s = smoothing(A,F, u_i, steps,1/2);
+        % Restrict residual to coarse grid 
+        r_s_bar = R*r_s;
 
-% Calculate  residual in the fine grid 
+        %Calculatre the correction
+        e_s_bar = A_bar\r_s_bar;
 
-r_s = F-A*u_s;
+        % Prolong residual to fine grid
+        e_s = P*e_s_bar;
 
-% Restrict residual to coarse grid 
+        %Update solution
+        u_i = u_s + e_s;
 
-r_s_bar = R*r_s;
+        % Post-smoothing 
+        u_i = smoothing(A,F,u_i,steps,1/2);
 
-%Calculatre the correction
+        err = norm(F-A*u_i,2);
+        k = k+1;
+        errvect(k) = err;
 
-e_s_bar =A_bar\ r_s_bar;
+    end
 
-% Prolong residual to fine grid
-
-e_s = P*e_s_bar;
-
-
-%Update solution
-
-u_i =u_s+e_s;
-
-
-% Post-smoothing 
-
-u_i = smoothing(A,F,u_i,steps,1/2);
-
-err =norm(e_s,2);
-
-k= k+1;
-errvect(k) = err;
-
-end
-
-
-iter =k-1;
-
-u1_m_grid =u_i;
+    iter =k-1;
+    u1_m_grid =u_i;
 end 

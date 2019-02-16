@@ -28,9 +28,13 @@ G = makeF(X,Y,g,N,M);
 
 % Solving the system and reshaping
 u0 = zeros(length(F),1);
+<<<<<<< HEAD
 parameter = [0.1,0.5,1];
 lambda = cos(pi*dx);
 h = figure
+=======
+h = figure;
+>>>>>>> bf97ab8f30666d75905dae39610c42618948c39a
 % Example Problem 1
 for w=parameter
     [y_1_RJ, err_1_RJ, errvec_1_RJ] = RelaxedJacobi(w,A,F,u0,tol); y_1_RJ = reshape(y_1_RJ, M-1, N-1); u1(2:M,2:N) = y_1_RJ;
@@ -45,7 +49,7 @@ for w=parameter
 end
 hold off
 
-g=figure
+g=figure;
 % Example Problem 2
 for w=parameter
     [y_2_RJ,err_2_RJ, errvec_2_RJ] = RelaxedJacobi(w,A,G,u0,tol); y_2_RJ = reshape(y_2_RJ, M-1, N-1); u2(2:M,2:N) = y_2_RJ;

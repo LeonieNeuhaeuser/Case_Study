@@ -1,9 +1,10 @@
 
 %% Error plots 
 clear, close all
-omegavector= linspace(0,2,11)
+omegavector = linspace(0,2,14);
 omegavector(1)=[];
 omegavector(10)=[];
+
 % Example problems 
 f = @(x,y) 13*pi^2*sin(2*pi*x).*sin(3*pi*y);
 g = @(x,y) -(x-1).^3.*(42*x.^2-24*x+2).*y.*(y-1)-2*x.^2.*(x-1).^5; 
@@ -32,8 +33,8 @@ G = makeF(X,Y,g,N,M);
 
 % Solving the system and reshaping
 u0 = zeros(length(F),1);
-for i=1:numel(omegavector)
-    w=omegavector(i);
+for i = 1:numel(omegavector)
+    w = omegavector(i);
     [y_1_SOR, err_1_SOR, errvec_1_SOR] = SOR(w,A,F,u0,tol);
     semilogy([1:numel(errvec_1_SOR)],errvec_1_SOR, 'DisplayName',sprintf('%i',w));
     legend('show')
@@ -42,11 +43,38 @@ end
 title('Convergence plots for different omega - SOR- Test 1')
 
 figure
-for i=1:numel(omegavector)
-    w=omegavector(i);
+for i = 1:numel(omegavector)
+    w = omegavector(i);
     [y_2_SOR,err_2_SOR, errvec_2_SOR] = SOR(w,A,G,u0,tol);
     semilogy([1:numel(errvec_2_SOR)],errvec_2_SOR, 'DisplayName',sprintf('%i',w));
     legend('show')
     hold on
 end
 title('Convergence plots for different omega - SOR- Test 2')
+
+%% Convergence rates as function of w 
+
+omegavector = linspace(0.01,1.99,200); 
+k_1 = zeros(1,length(omegavector)); k_2 = k_1; 
+
+% Solving the system and reshaping
+u0 = zeros(length(F),1);
+for i = 1:numel(omegavector)
+    w = omegavector(i);
+    [y_1_SOR, err_1_SOR, errvec_1_SOR] = SOR(w,A,F,u0,tol);
+    k_1(i) = length(errvec_1_SOR); 
+end
+figure
+semilogy(omegavector, k_1)
+xlabel('$\omega$','Interpreter','latex')
+ylabel('Iterations', 'Interpreter', 'latex')
+
+for i = 1:numel(omegavector)
+    w = omegavector(i);
+    [y_2_SOR,err_2_SOR, errvec_2_SOR] = SOR(w,A,G,u0,tol);
+    k_2(i) = length(errvec_2_SOR); 
+end
+figure
+semilogy(omegavector, k_2)
+xlabel('$\omega$','Interpreter','latex')
+ylabel('Iterations', 'Interpreter', 'latex')

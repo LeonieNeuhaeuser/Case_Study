@@ -1,7 +1,7 @@
 
 %% Error plots 
 clear, close all
-omegavector= linspace(0,2,11)
+omegavector = linspace(0,2,11);
 omegavector(1)=[];
 omegavector(10)=[];
 % Example problems 
@@ -50,3 +50,30 @@ for i=1:numel(omegavector)
     hold on
 end
 title('Convergence plots for different omega - Sym-SOR- Test 2')
+
+%% Convergence rates as function of w 
+
+omegavector = linspace(0.01,1.99,200); 
+k_1 = zeros(1,length(omegavector)); k_2 = k_1; 
+
+% Solving the system and reshaping
+u0 = zeros(length(F),1);
+for i = 1:numel(omegavector)
+    w = omegavector(i);
+    [y_1_SSOR, err_1_SSOR, errvec_1_SSOR] = SSOR2(w,A,F,u0,tol);
+    k_1(i) = length(errvec_1_SSOR); 
+end
+figure
+semilogy(omegavector, k_1)
+xlabel('$\omega$','Interpreter','latex')
+ylabel('Iterations', 'Interpreter', 'latex')
+
+for i = 1:numel(omegavector)
+    w = omegavector(i);
+    [y_2_SSOR,err_2_SSOR, errvec_2_SSOR] = SSOR2(w,A,G,u0,tol);
+    k_2(i) = length(errvec_2_SSOR); 
+end
+figure
+semilogy(omegavector, k_2)
+xlabel('$\omega$','Interpreter','latex')
+ylabel('Iterations', 'Interpreter', 'latex')
