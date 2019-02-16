@@ -48,13 +48,12 @@ for N = iterations
     bound = [bound curr_bound];
 end
 
-<<<<<<< HEAD
 h=figure
-    loglog(iterations,err_vec1)
-=======
-h=figure;
-    plot(iterations,err_vec1)
->>>>>>> bf97ab8f30666d75905dae39610c42618948c39a
+loglog(iterations,err_vec1)
+
+
+%plot(iterations,err_vec1)
+
     hold on
     loglog(iterations,bound)
     legend("actual performance","upper bound", 'Location','North')
@@ -62,13 +61,12 @@ h=figure;
     xlabel("number of gridpoints (N=M)")
     ylabel("iterations")
 
-<<<<<<< HEAD
 g=figure
-    loglog(iterations,err_vec2)
-=======
-g=figure;
-    plot(iterations,err_vec2)
->>>>>>> bf97ab8f30666d75905dae39610c42618948c39a
+loglog(iterations,err_vec2)
+
+
+%plot(iterations,err_vec2)
+
     hold on
     loglog(iterations,bound)
     legend("actual performance","upper bound", 'Location', 'North')

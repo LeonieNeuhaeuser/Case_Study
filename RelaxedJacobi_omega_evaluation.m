@@ -28,22 +28,13 @@ G = makeF(X,Y,g,N,M);
 
 % Solving the system and reshaping
 u0 = zeros(length(F),1);
-<<<<<<< HEAD
 parameter = [0.1,0.5,1];
-lambda = cos(pi*dx);
-h = figure
-=======
 h = figure;
->>>>>>> bf97ab8f30666d75905dae39610c42618948c39a
 % Example Problem 1
 for w=parameter
     [y_1_RJ, err_1_RJ, errvec_1_RJ] = RelaxedJacobi(w,A,F,u0,tol); y_1_RJ = reshape(y_1_RJ, M-1, N-1); u1(2:M,2:N) = y_1_RJ;
     semilogy(errvec_1_RJ, 'Displayname', sprintf('%i',w));
     hold on
-    len = length(errvec_1_RJ);
-    curr_lam = (1-w)+w*lambda;
-    x = linspace(0,len,len)
-    semilogy(x,norm(u1(1:M+1,1:N+1))*curr_lam.^x)
     title('Test problem 1')
     legend('show');
 end
