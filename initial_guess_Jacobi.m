@@ -40,9 +40,10 @@ h = figure
     semilogy(newerrvec_1_RJ);
     len = length(errvec_1_RJ);
     curr_lam = lambda;
-    x = linspace(0,1.2*len,1.2*len);
-    semilogy(x,norm(u1(1:M+1,1:N+1))*curr_lam.^x);
-    semilogy(x,norm(u1(1:M+1,1:N+1))*lambda_max.^x);
+    x = linspace(0,6*len,1.2*len);
+    y = linspace(0,len,len);
+    semilogy(y,100*norm(u1(1:M+1,1:N+1))*curr_lam.^y, '--');
+    semilogy(x,100*norm(u1(1:M+1,1:N+1))*lambda_max.^x, '--');
     title('Test problem 1', 'Interpreter','latex');
     legend("initial guess zero vector", "perturbated","$\lambda^{2,3}$",'spectral radius', 'Interpreter', 'latex');
     xlabel('iterations', 'Interpreter','latex');
@@ -57,8 +58,8 @@ g=figure
     semilogy(newerrvec_2_RJ);
     len = length(errvec_2_RJ);
     curr_2am = lambda;
-    x = linspace(0,2.5*len,2*len)
-    semilogy(x,norm(u1(1:M+1,1:N+1))*lambda_max.^x);
+    z = linspace(0,2.5*len,2*len)
+    semilogy(z,norm(u1(1:M+1,1:N+1))*lambda_max.^z, '--');
     title('Test problem 2')
     legend("initial guess zero vector", "perturbated","spectral radius", 'Interpreter','latex');
     
