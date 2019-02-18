@@ -8,7 +8,7 @@ rk=RHS-A*u0;
 pk=rk;
 Apk=A*pk;
 norm_rk=norm(rk,2);
-errvect(1)=norm_rk;
+errvect(1)=sqrt((A\rk)'*rk);
 %loop
 k=1;
 uk=u0;

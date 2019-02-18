@@ -28,9 +28,14 @@ u2 = zeros(M+1,N+1);
 A = create_2d_finite_diff_A(xmin,xmax,ymin,ymax,N,M);
 F = makeF(X,Y,f,N,M);%generate the RHS
 G = makeF(X,Y,g,N,M);
+sol1_vec = makeF(X,Y,sol1,N,M);
+sol2_vec = makeF(X,Y,sol2,N,M);
+
 
 % Solving the system and reshaping
 u0 = zeros(length(F),1);
+%u0 = randn(length(F),1);
+
 %end tic 1 
 toc
 
@@ -50,23 +55,30 @@ tic
 y_1 = reshape(y1_CG, M-1, N-1); u1(2:M,2:N) = y_1;
 y_2 = reshape(y2_CG, M-1, N-1); u2(2:M,2:N) = y_2;
 
+x = linspace(0,length(errvect_1),length(errvect_1));
+y = linspace(0,length(y_2),length(y_2));
+ini_err1= sol1_vec-u0;
+ini_err2= sol2_vec-u0;
+
 % Plotting the errors
-figure
+h=figure;
 title('Test problem 1')
-hold on
 semilogy(errvect_1)
+hold on
+semilogy(2*sqrt(1/2*(cos(2 * pi * dx)+cos(3*pi*dx))) * ((sqrt(cond(full(A)))-1)/(sqrt(cond(full(A)))+1)).^x)
+semilogy(2*sqrt(ini_err1'*A*ini_err1) * ((sqrt(cond(full(A)))-1)/(sqrt(cond(full(A)))+1)).^x)
 hold off
-legend('CG')
+legend('CG', 'upper bound according to eigenvalue', 'upper bound')
 ylabel('error') 
 xlabel('iterations') 
 
-figure
+g=figure;
 semilogy(errvect_2)
-title('Test problem 2')
 hold on
-%
+semilogy(2*sqrt(ini_err2'*A*ini_err2) * ((sqrt(cond(full(A)))-1)/(sqrt(cond(full(A)))+1)).^y)
+title('Test problem 2')
 hold off
-legend('CG')
+legend('CG', 'upper bound')
 ylabel('error') 
 xlabel('iterations') 
 
