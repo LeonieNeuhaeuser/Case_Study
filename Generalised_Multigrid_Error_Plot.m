@@ -12,12 +12,12 @@ xmin = 0; xmax = 1; ymin = 0; ymax = 1;
 tol = 1e-5;
 presteps = 5;
 poststeps = 5; 
-levels = 2; 
+levels = 5; 
 nmin = 1000;
 
 %but are preferred for SOR and SSOR 
-N = 256; 
-M = 256; 
+N = 512; 
+M = 512; 
 
 % Initialise 
 dx = 1/N; dy = 1/M;
