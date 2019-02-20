@@ -3,7 +3,7 @@
 clear, close all
 omegavector = linspace(0,2,14);
 omegavector(1)=[];
-omegavector(10)=[];
+omegavector(13)=[];
 
 % Example problems 
 f = @(x,y) 13*pi^2*sin(2*pi*x).*sin(3*pi*y);

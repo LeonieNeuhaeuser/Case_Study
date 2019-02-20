@@ -9,15 +9,15 @@ sol2 = @(x,y) (x-1).^5.*x.^2.*y.*(y-1);
 
 % Parameters 
 xmin = 0; xmax = 1; ymin = 0; ymax = 1;
-tol = 1e-3;
+tol = 1e-6;
 presteps = 5;
 poststeps = 5; 
-levels = 3; 
+levels = 2; 
 nmin = 1000;
 
 %but are preferred for SOR and SSOR 
-N = 1024; 
-M = 1024; 
+N = 512; 
+M = 512; 
 
 % Initialise 
 dx = 1/N; dy = 1/M;

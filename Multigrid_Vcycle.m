@@ -42,6 +42,8 @@ function [u, errvect] = Multigrid_Vcycle(A,F,u0,tol,presteps,poststeps,nmin,leve
     err = norm(A*u-F,2)/err0;
     errvect = [errvect err];
     end
+    
+    errvect = err0*errvect; 
 
 end
         
